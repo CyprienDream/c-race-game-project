@@ -9,7 +9,33 @@ add_executable(semester2Project
         sortedlist.h
         sortedlist.c
         LS_allegro.h
-        LS_allegro.c driverconfiguration.h raceconfiguration.h carconfiguration.h part.h category.h category.c part.c raceconfiguration.c carconficuration.c driverconfiguration.c racepoint.c racepoint.h simulation.h simulation.c driverraceresult.h driverraceresult.c raceresult.h raceresult.c standing.h standing.c standings.h standings.c)
+        LS_allegro.c
+        driverconfiguration.h
+        raceconfiguration.h
+        carconfiguration.h
+        part.h
+        category.h
+        category.c
+        part.c
+        raceconfiguration.c
+        carconficuration.c
+        driverconfiguration.c
+        racepoint.c
+        racepoint.h
+        simulation.h
+        simulation.c
+        driverraceresult.h
+        driverraceresult.c
+        raceresult.h
+        raceresult.c
+        standing.h
+        standing.c
+        standings.h
+        standings.c
+        view/ViewComponent.h
+        view/BoxBoundViewComponent.h
+        view/ViewComponent.c
+        view/BoxBoundViewComponent.c view/BitMapViewComponent.c view/BitMapViewComponent.h)
 
 include_directories(/usr/include/allegro5)
 
