@@ -2,6 +2,11 @@
 #include <string.h>
 #include <stdlib.h>
 #include "sortedlist.h"
+#include "LS_allegro.h"
+#include "view/ViewComponent.h"
+#include "view/BoxBoundViewComponent.h"
+#include "view/BitMapViewComponent.h"
+#include "string.h"
 
 #define STRING_LENGTH 500
 #define MAX_DRIVERS 7
@@ -510,11 +515,28 @@ int canProgramStart (int argc){
     }
 }
 
+void test() {
+    LS_allegro_init(500, 500, "CUNT");
+    char* wd = malloc(1000*sizeof(char));
+    ViewComponent* viewComponent1 = (ViewComponent*) BOX_BOUND_VIEW_COMPONENT_createDefault(200, 200, 0, GREEN, 400, 410);
+    ViewComponent* viewComponent = (ViewComponent*) BIT_MAP_VIEW_COMPONENT_createDefault(strcat(getcwd(wd, 1000), "/dick.png"), 200, 200, 100, 200);
+
+    VIEW_COMPONENT_addChild(viewComponent1, viewComponent);
+    while(true) {
+        VIEW_COMPONENT_draw(viewComponent1);
+        LS_allegro_clear_and_paint(BLACK);
+
+    }
+
+    LS_allegro_exit();
+}
+
 int main(int argc, char **argv) {
     String input = setString("");
     int option = 0;
     Model *m = initializeModel();
 
+    test();
     if (canProgramStart(argc)) {
         m = processFiles(argv, m);
         if (m->files_ok) {
