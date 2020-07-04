@@ -1,0 +1,8 @@
+//
+// Created by cyprien on 7/4/20.
+//
+
+#ifndef SEMESTER2PROJECT_STANDING_H
+#define SEMESTER2PROJECT_STANDING_H
+
+#endif //SEMESTER2PROJECT_STANDING_H
