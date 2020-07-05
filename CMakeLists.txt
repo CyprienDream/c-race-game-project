@@ -6,37 +6,39 @@ find_package(Threads)
 
 add_executable(semester2Project
         main.c
-        sortedlist.h
-        sortedlist.c
-        LS_allegro.h
-        LS_allegro.c
-        driverconfiguration.h
-        raceconfiguration.h
-        carconfiguration.h
-        part.h
-        category.h
-        category.c
-        part.c
-        raceconfiguration.c
-        carconficuration.c
-        driverconfiguration.c
-        racepoint.c
-        racepoint.h
-        simulation.h
-        simulation.c
-        driverraceresult.h
-        driverraceresult.c
-        raceresult.h
-        raceresult.c
-        standing.h
-        standing.c
-        standings.h
-        standings.c
-        view/ViewComponent.h
+        view/BitMapViewComponent.c
+        view/BitMapViewComponent.h
+        view/BoxBoundViewComponent.c
         view/BoxBoundViewComponent.h
         view/ViewComponent.c
-        view/BoxBoundViewComponent.c view/BitMapViewComponent.c view/BitMapViewComponent.h
+        view/ViewComponent.h
+        carconfiguration.h
+        carconfiguration.c
+        category.h
+        category.c
+        driverconfiguration.c
+        driverconfiguration.h
+        driverraceresult.c
+        driverraceresult.h
+        LS_allegro.h
         LS_allegro.c
+        main.c
+        part.c
+        part.h
+        raceconfiguration.c
+        raceconfiguration.h
+        racepoint.c
+        racepoint.h
+        raceresult.c
+        raceresult.h
+        simulation.c
+        simulation.h
+        sortedlist.c
+        sortedlist.h
+        standing.c
+        standing.h
+        standings.c
+        standings.h
         )
 
 
