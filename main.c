@@ -7,6 +7,7 @@
 #include "view/BoxBoundViewComponent.h"
 #include "view/BitMapViewComponent.h"
 #include "string.h"
+#include "view/CarBoxComponent.h"
 
 #define STRING_LENGTH 500
 #define MAX_DRIVERS 7
@@ -102,22 +103,6 @@ struct DriverInfo initializeDriverInfo (){
     d.tyre = 0;
     d.op1_done = 0;
     return d;
-}
-
-struct GrandPrix initializeGrandPrix(){
-    struct GrandPrix gp;
-
-    gp.position = 0;
-    gp.name = (char*)malloc(sizeof(char)*STRING_LENGTH);
-    gp.app_acceleration = 0;
-    gp.app_consumption = 0;
-    gp.app_reliability = 0;
-    gp.app_speed = 0;
-    gp.time = 0;
-    gp.pit_stop_time = 0;
-    gp.num_pit_stop = 0;
-
-    return gp;
 }
 
 struct Racer initializeRacer(){
@@ -431,7 +416,6 @@ Model *processGPsFile (char *file_name, Model *m){
             fscanf(fp, "%d", &m->num_GPs);
 
             for (i = 0; i < m->num_GPs; i++){
-                e = initializeGrandPrix();
 
                 fscanf(fp, "%d", &e.circuit_number);
                 fscanf(fp, " %[^\n]", e.name);
@@ -513,10 +497,10 @@ int canProgramStart (int argc){
 }
 
 void test() {
-    LS_allegro_init(500, 500, "CUNT");
+    LS_allegro_init(1200, 600, "CUNT");
     char* wd = malloc(1000*sizeof(char));
     ViewComponent* viewComponent1 = (ViewComponent*) BOX_BOUND_VIEW_COMPONENT_createDefault(200, 200, 0, GREEN, 400, 410);
-    ViewComponent* viewComponent = (ViewComponent*) BIT_MAP_VIEW_COMPONENT_createDefault(strcat(getcwd(wd, 1000), "/dick.png"), 200, 200, 100, 200);
+    ViewComponent* viewComponent = CAR_BOX_COMPONENT_constructor(strcat(getcwd(wd, 1000), "/boxes.png"), 1200, 600);
 
     VIEW_COMPONENT_addChild(viewComponent1, viewComponent);
     while(true) {

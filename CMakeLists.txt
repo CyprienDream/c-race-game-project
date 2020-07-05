@@ -41,7 +41,7 @@ add_executable(semester2Project
         standing.h
         standings.c
         standings.h
-        )
+        view/CarBoxComponent.c view/CarBoxComponent.h)
 
 
 include_directories(/usr/include/allegro5)

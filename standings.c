@@ -11,8 +11,6 @@ struct Standings{
 
 Standing **STANDINGS_getOverallResults(Standings *self){
     Standing **standing = STANDING_initStanding();
-
-    DR
-
+    return standing;
 }
 ;
