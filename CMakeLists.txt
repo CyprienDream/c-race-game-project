@@ -12,6 +12,8 @@ add_executable(semester2Project
         view/BoxBoundViewComponent.h
         view/ViewComponent.c
         view/ViewComponent.h
+        view/ConfigurationPanelComponent.c
+        view/ConfigurationPanelComponent.h
         carconfiguration.h
         carconfiguration.c
         category.h

@@ -32,7 +32,7 @@ struct ViewComponent* allocViewComponent() {
     return malloc(sizeof(ViewComponent));
 }
 
-struct ViewComponent* initialiseViewComponent(struct ViewComponent* viewComponent) {
+struct ViewComponent* VIEW_COMPONENT_INIT(struct ViewComponent* viewComponent) {
     if(NULL == viewComponent) {
         printf("ERROR: Out of memory! Failed to alloc view component");
         return viewComponent;
@@ -58,7 +58,7 @@ struct ViewComponent* initialiseViewComponent(struct ViewComponent* viewComponen
 
 struct ViewComponent* allocAndInitialiseViewComponent() {
     struct ViewComponent* viewComponent = allocViewComponent();
-    viewComponent = initialiseViewComponent(viewComponent);
+    viewComponent = VIEW_COMPONENT_INIT(viewComponent);
 
     return viewComponent;
 }
