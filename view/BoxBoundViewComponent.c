@@ -13,6 +13,8 @@
 #define BR_Y(l, cy) (cy + (l / 2))
 
 struct BoxBoundViewComponent {
+    size_t size;
+    void (*destr)(void* self);
     float centerX;
     float centerY;
     float rotation;
@@ -26,7 +28,9 @@ struct BoxBoundViewComponent {
     float height;
 };
 
-void freeCustom(ViewComponent* self) {}
+void freeCustom(void* self) {
+    VIEW_COMPONENT_destructor(self);
+}
 
 void drawComponent(ViewComponent* self) {
     int i = 0;
@@ -94,20 +98,9 @@ struct BoxBoundViewComponent* initBoxBoundViewComponent(struct BoxBoundViewCompo
 }
 
 BoxBoundViewComponent* BOX_BOUND_VIEW_COMPONENT_createDefault(float center_x, float center_y, float rotation, int n_colour, float width, float height) {
-    struct BoxBoundViewComponent* boxBoundViewComponent = allocateBoxBoundViewComponent();
-    boxBoundViewComponent = initBoxBoundViewComponent(boxBoundViewComponent);
+    struct BoxBoundViewComponent* boxBoundViewComponent;
 
-    if(NULL == boxBoundViewComponent) {
-        printf("ERROR: Could not allocate for view component");
-        return boxBoundViewComponent;
-    }
-
-    boxBoundViewComponent->centerX = center_x;
-    boxBoundViewComponent->centerY = center_y;
-    boxBoundViewComponent->rotation = rotation;
-    boxBoundViewComponent->colour = LS_allegro_get_color(n_colour);
-    boxBoundViewComponent->width = width;
-    boxBoundViewComponent->height = height;
+    boxBoundViewComponent = (BoxBoundViewComponent*) VIEW_COMPONENT_createSuper(CLASS_create(sizeof(BoxBoundViewComponent), freeCustom),center_x,center_y,rotation,NULL);
 
     return boxBoundViewComponent;
 }

@@ -25,7 +25,7 @@ void freeInternalBitmapComponent(ViewComponent * self) {
 
     int i = 0;
     for(; i < realSelf->num_children; i++) {
-        VIEW_COMPONENT_free(realSelf->children[i]);
+        VIEW_COMPONENT_destructor(realSelf->children[i]);
         free(realSelf->children[i]);
     }
 

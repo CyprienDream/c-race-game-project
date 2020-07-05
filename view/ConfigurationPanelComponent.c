@@ -12,18 +12,19 @@ struct CarConfigurationComponent {
     void (*_freeCustom)(ViewComponent *self);
 };
 
-void freeConfigPanelComponent(ViewComponent* self) {
+void freeConfigPanelComponent(void* self) {
     CarConfigurationComponent* carConfigurationComponent = (CarConfigurationComponent*) self;
     int i = 0;
     carConfigurationComponent->draw = NULL;
     carConfigurationComponent->_freeCustom = NULL;
 
     for(; i < carConfigurationComponent->num_children; i++) {
-        VIEW_COMPONENT_free(carConfigurationComponent->children[i]);
+        VIEW_COMPONENT_destructor(carConfigurationComponent->children[i]);
         free(carConfigurationComponent->children[i]);
     }
 
     free(carConfigurationComponent->children);
+    VIEW_COMPONENT_destructor((ViewComponent*)carConfigurationComponent);
 }
 
 CarConfigurationComponent* allocCarConfigComponent() {
@@ -35,7 +36,16 @@ CarConfigurationComponent* initCarConfigComponent(CarConfigurationComponent* sel
 }
 
 CarConfigurationComponent* CAR_CONFIGURATION_COMPONENT_constructorDefault(const CarConf* carConfiguration, const Category* current_cat, const Part* current_part) {
+    struct CarConfigurationComponent * carConfigurationComponent;
 
+    carConfigurationComponent =(CarConfigurationComponent*) VIEW_COMPONENT_createSuper(CLASS_create(sizeof(*carConfigurationComponent)
+                    ,freeConfigPanelComponent)
+                    ,carConfigurationComponent->centerX
+                    ,carConfigurationComponent->centerY
+                    ,carConfigurationComponent->rotation
+                    ,carConfigurationComponent->children);
+
+    return carConfigurationComponent;
 }
 
 void CAR_CONFIGURATION_COMPONENT_setCurrentPart(CarConfigurationComponent* self, const Part* new_current_part);

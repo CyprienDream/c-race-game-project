@@ -5,7 +5,9 @@
 
 typedef struct Class Class;
 
-void* CLASS_new(Class* class);
+Class* CLASS_create(size_t size, void (*destr)(void* self));
+
+void* CLASS_new(const Class* class);
 
 void CLASS_destruct(Class *self);
 

@@ -1,10 +1,13 @@
 #include "ViewComponent.h"
 #include "stdlib.h"
 #include "stdio.h"
+#include "Class.h"
 
 #define CHILD_ARRAY_STEP_COUNT 5;
 
 struct ViewComponent {
+    size_t size;
+    void (*destr)(void* self);
     float centerX;
     float centerY;
     float rotation;
@@ -15,17 +18,18 @@ struct ViewComponent {
     void (*_freeCustom)(ViewComponent *self);
 };
 
-void freeInternalViewComponent(ViewComponent* self) {
+void freeInternalViewComponent(void* self) {
+    struct ViewComponent* rSelf = (ViewComponent*) self;
     int i = 0;
-    self->draw = NULL;
-    self->_freeCustom = NULL;
+    rSelf->draw = NULL;
+    rSelf->_freeCustom = NULL;
 
-    for(; i < self->num_children; i++) {
-        self->children[i]->_freeCustom(self->children[i]);
-        free(self->children[i]);
+    for(; i < rSelf->num_children; i++) {
+        rSelf->children[i]->_freeCustom(rSelf->children[i]);
+        free(rSelf->children[i]);
     }
 
-    free(self->children);
+    free(rSelf->children);
 }
 
 struct ViewComponent* allocViewComponent() {
@@ -63,17 +67,23 @@ struct ViewComponent* allocAndInitialiseViewComponent() {
     return viewComponent;
 }
 
-ViewComponent* VIEW_COMPONENT_createDefault(float center_x, float center_y, float rotation) {
-    struct ViewComponent* self = allocAndInitialiseViewComponent();
+ViewComponent* VIEW_COMPONENT_createSuper(Class* class, float center_x, float center_y, float rotation, ViewComponent** children) {
+    ViewComponent* self = (ViewComponent*) CLASS_new(class);
 
     self->centerX = center_x;
     self->centerY = center_y;
     self->rotation = rotation;
+    self->children = children;
 
     return self;
 }
 
-ViewComponent* VIEW_COMPONENT_createWithChildren(float center_x, float center_y, float rotation, ViewComponent** children) {
+
+ViewComponent* VIEW_COMPONENT_constructorDefault(float center_x, float center_y, float rotation) {
+    const struct Class* class = CLASS_create(sizeof(ViewComponent), freeInternalViewComponent);
+}
+
+ViewComponent* VIEW_COMPONENT_constructorWithChildren(float center_x, float center_y, float rotation, ViewComponent** children) {
     struct ViewComponent* self = allocAndInitialiseViewComponent();
 
     self->centerX = center_x;
@@ -119,7 +129,7 @@ void VIEW_COMPONENT_draw(ViewComponent* self) {
     self->draw(self);
 }
 
-void VIEW_COMPONENT_free(ViewComponent* self) {
+void VIEW_COMPONENT_destructor(ViewComponent* self) {
     self->_freeCustom(self);
 }
 

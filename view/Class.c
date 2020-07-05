@@ -1,4 +1,5 @@
 #include "Class.h"
+#include "stdio.h"
 
 struct Class {
     size_t size;
@@ -7,8 +8,26 @@ struct Class {
 
 void stub_destr(void* self) {};
 
+Class* CLASS_create(size_t size, void (*destr)(void* self)) {
+    struct Class* class = calloc(1, size);
 
-void* CLASS_new(Class* class) {
+    if(class) {
+        if(destr) {
+            class->destr = destr;
+        }
+        else {
+            class->destr = stub_destr;
+        }
+    }
+    else {
+        printf("Failed to alloc memory for object of size ");
+        printf("%zu", size);
+    }
+
+    return class;
+}
+
+void* CLASS_new(const  Class* class) {
 
     //no class? no object!
     if(!class) {
@@ -23,9 +42,6 @@ void* CLASS_new(Class* class) {
         return NULL;
     }
 
-    if(!class->destr) {
-        class->destr = stub_destr;
-    }
     //since all objects start with a class definition
     //as the first field opy class pointer to the first position
     *(const struct Class**) obj = class;

@@ -1,13 +1,17 @@
 #ifndef SEMESTER2PROJECT_VIEWCOMPONENT_H
 #define SEMESTER2PROJECT_VIEWCOMPONENT_H
 
+#include "Class.h"
+
 #define MIN_MAX_CHILDREN 10
 
 typedef struct ViewComponent ViewComponent;
 
-ViewComponent* VIEW_COMPONENT_createDefault(float center_x, float center_y, float rotation);
+ViewComponent* VIEW_COMPONENT_createSuper(Class* class, float center_x, float center_y, float rotation, ViewComponent** children);
 
-ViewComponent* VIEW_COMPONENT_createWithChildren(float center_x, float center_y, float rotation, ViewComponent** children);
+ViewComponent* VIEW_COMPONENT_constructorDefault(float center_x, float center_y, float rotation);
+
+ViewComponent* VIEW_COMPONENT_constructorWithChildren(float center_x, float center_y, float rotation, ViewComponent** children);
 
 //for sub-types
 struct ViewComponent* VIEW_COMPONENT_INIT(ViewComponent* viewComponent);
@@ -18,7 +22,7 @@ void VIEW_COMPONENT_addChildBatch(ViewComponent* self, ViewComponent** children,
 
 void VIEW_COMPONENT_draw(ViewComponent* self);
 
-void VIEW_COMPONENT_free(ViewComponent* self);
+void VIEW_COMPONENT_destructor(ViewComponent* self);
 
 void VIEW_COMPONENT_setCenterX(ViewComponent* self, float x);
 
