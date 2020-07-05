@@ -1,17 +1,3 @@
-/**************************************************************************** 
- * 
- * @Objective: Sorted list data structure implementation
- *             A sorted list is a linear data structure, in which the 
- *             elements are not stored at contiguous memory locations.
- * @Author/s:  Eduard de Torres (eduard.detorres@salle.url.edu)
- *			   David Vernet (david.vernet@salle.url.edu)	
- *			   Alberto Soto (alberto.soto@salle.url.edu)
- *			   Daniel Amo (daniel.amo@salle.url.edu)
- *			   Eduard Fernandez (eduard.fernandez@salle.url.edu)
- * @Creation date: 20/07/2018
- * @Last modification date: 11/04/2019
- * 
- ****************************************************************************/
 
 // Define guard to prevent compilation problems if we add the module more
 //  than once in the project.
@@ -30,72 +16,23 @@
 
 
 // Data types
-typedef struct GrandPrix {
-    int position;
+typedef struct{
+    int circuit_number;
     char *name;
-    int app_speed;
-    int app_acceleration;
-    int app_consumption;
-    int app_reliability;
+    int speed;
+    int acceleration;
+    int consumption;
+    int reliability;
     float time;
     int pit_stop_time;
     int num_pit_stop;
 }Element;
 
-/*
- * Node is a recursive structure that will contain each one of the elements.
- * A node has two main fields, the element to store and a pointer to the next
- *  node in the Linear Data Structure.
- * The structure is recursively defined (a Node has a pointer to another node),
- *  so we need to define a new type (typedef) from a structure (struct _Node).
- */
-typedef struct _Node {		
+typedef struct _Node {
 	Element element;
 	struct _Node * next;
 } Node;
 
-/*
- * A sorted list is a linear data structure, in which the elements are not 
- *  stored at contiguous memory locations. The elements in a sorted list 
- *  are stored inside Nodes that are sorted using pointers.
- *
- *  +---+----+     +---+----+     +----+----+ 
- *  | 1 |  o-|---> | 2 |  o-|---> | 3  |NULL| 
- *  +---+----+     +---+----+     +----+----+
- *
- * This implementation of the sorted list will be using an auxiliary Node
- *  we call the "phantom node". This auxiliary node will help us with the
- *  different operations from the list. It solves the problem of the list
- *  being empty (empty == no nodes) and let us assume that we will always
- *  have one node in the list.
- *
- * Example of an empty list:
- *  
- *               Phantom node
- *       +---+   +---+----+
- *  head | o-|-->|   |NULL|
- *       +---+   +---+----+
- *
- * The sorted list will have a "Point of View" (POV). This point of view is the
- *  element (Node) we are visiting at the moment from the list. Whenever 
- *  we decide to add, remove or get an element, we will work from the point 
- *  of view. This point of view is represented by the "previous" pointer in
- *  the SortedList type. This previous pointer will always point to "the 
- *  element before the point of view". That is why is called previous. We need
- *  to point to the element before the point of view to be able to add new
- *  elements before the first element.
- *
- *        +---+
- *   head | o-|---------
- *        +---+         |
- *   prev | o-|---------|-----------
- *        +---+         |           |
- *                      v           v          Point of View
- *                    +---+---+   +---+---+     +---+---+     +---+----+ 
- *                    |   | o-|-->| 1 | o-|---> | 2 | o-|---> | 3 |NULL| 
- *                    +---+---+   +---+---+     +---+---+     +---+----+
- *
- */
 typedef struct {
 	int error;			// Error code to keep track of failing operations;
 	Node * head;	 	// Head/First element or Phantom node;

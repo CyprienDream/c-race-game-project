@@ -35,7 +35,10 @@ add_executable(semester2Project
         view/ViewComponent.h
         view/BoxBoundViewComponent.h
         view/ViewComponent.c
-        view/BoxBoundViewComponent.c view/BitMapViewComponent.c view/BitMapViewComponent.h)
+        view/BoxBoundViewComponent.c view/BitMapViewComponent.c view/BitMapViewComponent.h
+        LS_allegro.c
+        )
+
 
 include_directories(/usr/include/allegro5)
 

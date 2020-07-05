@@ -433,12 +433,12 @@ Model *processGPsFile (char *file_name, Model *m){
             for (i = 0; i < m->num_GPs; i++){
                 e = initializeGrandPrix();
 
-                fscanf(fp, "%d", &e.position);
+                fscanf(fp, "%d", &e.circuit_number);
                 fscanf(fp, " %[^\n]", e.name);
-                fscanf(fp, "%d", &e.app_speed);
-                fscanf(fp, "%d", &e.app_acceleration);
-                fscanf(fp, "%d", &e.app_consumption);
-                fscanf(fp, "%d", &e.app_reliability);
+                fscanf(fp, "%d", &e.speed);
+                fscanf(fp, "%d", &e.acceleration);
+                fscanf(fp, "%d", &e.consumption);
+                fscanf(fp, "%d", &e.reliability);
                 fscanf(fp, "%f", &e.time);
                 fscanf(fp, "%d", &e.pit_stop_time);
                 fscanf(fp, "%d", &e.num_pit_stop);
@@ -454,7 +454,6 @@ Model *processPartsFile (char *file_name, Model *m){
     FILE *fp = NULL;
     int i, j;
 
-    m->categories = (struct Category*)malloc(sizeof(struct Category));
 
     fp = fopen(file_name, "r");
 
@@ -469,7 +468,7 @@ Model *processPartsFile (char *file_name, Model *m){
         } else {
             fseek(fp, 0, SEEK_SET);
             fscanf(fp, "%d", &m->num_cat);
-            m->categories = realloc(m->categories, m->num_cat * sizeof(struct Category));
+            m->categories = malloc(m->num_cat * sizeof(struct Category));
 
             for (i = 0; i < m->num_cat; i++) {
                 fscanf(fp, " %[^\n]", m->categories[i].name.array);
@@ -492,7 +491,6 @@ Model *processPartsFile (char *file_name, Model *m){
 
 Model *processFiles (char **argv, Model *m){
 
-
     m = processPartsFile (argv[1], m);
     m = processGPsFile(argv[2], m);
     m = processRacersFile(argv[3], m);
@@ -502,7 +500,6 @@ Model *processFiles (char **argv, Model *m){
 }
 
 int checkNumArguments (int argc){
-
     return (argc == 5);
 }
 

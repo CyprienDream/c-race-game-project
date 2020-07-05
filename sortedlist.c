@@ -93,7 +93,7 @@ void 	SORTEDLIST_sortedAdd (SortedList * list, Element element) {
 	//  element), or after we found the place where to set the given element.
 	while (!SORTEDLIST_isAtEnd(*list) && !found) {
 		e = SORTEDLIST_get(list);
-		if (element.position > e.position) {
+		if (element.circuit_number > e.circuit_number) {
 			SORTEDLIST_next(list);
 		}
 		else {
