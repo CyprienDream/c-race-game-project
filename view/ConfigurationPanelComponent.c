@@ -12,7 +12,7 @@ struct CarConfigurationComponent {
     void (*_freeCustom)(ViewComponent *self);
 };
 
-void freeInternalViewComponent(ViewComponent* self) {
+void freeConfigPanelComponent(ViewComponent* self) {
     CarConfigurationComponent* carConfigurationComponent = (CarConfigurationComponent*) self;
     int i = 0;
     carConfigurationComponent->draw = NULL;

@@ -2,6 +2,7 @@
 // Created by cyprien on 7/4/20.
 //
 #include "standings.h"
+#include "stdlib.h"
 
 
 struct Standings{
@@ -11,8 +12,6 @@ struct Standings{
 
 Standing **STANDINGS_getOverallResults(Standings *self){
     Standing **standing = STANDING_initStanding();
-
-    DR
-
+    return NULL;
 }
 ;

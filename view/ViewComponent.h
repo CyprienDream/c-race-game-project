@@ -10,7 +10,7 @@ ViewComponent* VIEW_COMPONENT_createDefault(float center_x, float center_y, floa
 ViewComponent* VIEW_COMPONENT_createWithChildren(float center_x, float center_y, float rotation, ViewComponent** children);
 
 //for sub-types
-struct ViewComponent* VIEW_COMPONENT_INIT(struct ViewComponent* viewComponent);
+struct ViewComponent* VIEW_COMPONENT_INIT(ViewComponent* viewComponent);
 
 void VIEW_COMPONENT_addChild(ViewComponent* self, ViewComponent* child);
 

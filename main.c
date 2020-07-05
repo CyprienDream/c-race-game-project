@@ -92,7 +92,7 @@ void *initializeCharArray(char *array){
     }
 }
 
-struct DriverInfo initializeDriverInfo (){
+struct DriverInfo initializeDriverInfo () {
     struct DriverInfo d;
 
     d.driver_number = 0;
@@ -102,22 +102,6 @@ struct DriverInfo initializeDriverInfo (){
     d.tyre = 0;
     d.op1_done = 0;
     return d;
-}
-
-struct GrandPrix initializeGrandPrix(){
-    struct GrandPrix gp;
-
-    gp.position = 0;
-    gp.name = (char*)malloc(sizeof(char)*STRING_LENGTH);
-    gp.app_acceleration = 0;
-    gp.app_consumption = 0;
-    gp.app_reliability = 0;
-    gp.app_speed = 0;
-    gp.time = 0;
-    gp.pit_stop_time = 0;
-    gp.num_pit_stop = 0;
-
-    return gp;
 }
 
 struct Racer initializeRacer(){
@@ -431,7 +415,6 @@ Model *processGPsFile (char *file_name, Model *m){
             fscanf(fp, "%d", &m->num_GPs);
 
             for (i = 0; i < m->num_GPs; i++){
-                e = initializeGrandPrix();
 
                 fscanf(fp, "%d", &e.circuit_number);
                 fscanf(fp, " %[^\n]", e.name);
