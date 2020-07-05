@@ -6,12 +6,6 @@
 #include "../LS_allegro.h"
 #include "allegro5/allegro_primitives.h"
 
-#define TL_X(w, cx) (cx - (w / 2))
-#define BR_X(w, cx) (cx + (w / 2))
-
-#define TL_Y(l, cy) (cy - (l / 2))
-#define BR_Y(l, cy) (cy + (l / 2))
-
 struct BoxBoundViewComponent {
     float centerX;
     float centerY;

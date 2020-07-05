@@ -3,6 +3,13 @@
 
 #define MIN_MAX_CHILDREN 10
 
+
+#define TL_X(w, cx) (cx - (w / 2))
+#define BR_X(w, cx) (cx + (w / 2))
+
+#define TL_Y(l, cy) (cy - (l / 2))
+#define BR_Y(l, cy) (cy + (l / 2))
+
 typedef struct ViewComponent ViewComponent;
 
 ViewComponent* VIEW_COMPONENT_createDefault(float center_x, float center_y, float rotation);
@@ -10,7 +17,7 @@ ViewComponent* VIEW_COMPONENT_createDefault(float center_x, float center_y, floa
 ViewComponent* VIEW_COMPONENT_createWithChildren(float center_x, float center_y, float rotation, ViewComponent** children);
 
 //for sub-types
-struct ViewComponent* VIEW_COMPONENT_INIT(struct ViewComponent* viewComponent);
+ViewComponent* VIEW_COMPONENT_INIT(ViewComponent* viewComponent);
 
 void VIEW_COMPONENT_addChild(ViewComponent* self, ViewComponent* child);
 
